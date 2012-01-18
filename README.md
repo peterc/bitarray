@@ -2,21 +2,32 @@
 
 Basic, pure Ruby bit field. Pretty fast (for what it is) and memory efficient. Works well for Bloom filters (the reason I wrote it).
 
-Written in 2007 and not updated since then, just bringing it on to GitHub by user request. It used to be called Bitfield and was hosted at http://snippets.dzone.com/posts/show/4234
+Written in 2007 and not updated since then, just bringing it on to GitHub by user request. It used to be called Bitfield and was hosted at http://snippets.dzone.com/posts/show/4234 .. I will review the code and bring the docs up to date in due course.
+
+## Installation
+
+    gem install bitarray
 
 ## Examples
 
-Create a bit field 1000 bits wide
-    bf = BitField.new(1000)
+To use:
 
-Setting and reading bits
-    bf[100] = 1
-    bf[100]    .. => 1
-    bf[100] = 0
+    require 'bitarray'
 
-More
-    bf.to_s = "10101000101010101"  (example)
-    bf.total_set         .. => 10  (example - 10 bits are set to "1")
+Create a bit field 1000 bits wide:
+
+    ba = BitArray.new(1000)
+
+Setting and reading bits:
+
+    ba[100] = 1
+    ba[100]    .. => 1
+    ba[100] = 0
+
+More:
+
+    ba.to_s = "10101000101010101"  (example)
+    ba.total_set         .. => 10  (example - 10 bits are set to "1")
 
 ## License
 
