@@ -1,4 +1,5 @@
 require "test/unit"
+require "bitarray"
 
 class TestBitArray < Test::Unit::TestCase
 
@@ -62,16 +63,16 @@ class TestBitArray < Test::Unit::TestCase
   end
 
   def test_to_s
-    bf = BitArray.new(10)
-    bf[1] = 1
-    bf[5] = 1
-    assert_equal "0100010000", bf.to_s
+    ba = BitArray.new(10)
+    ba[1] = 1
+    ba[5] = 1
+    assert_equal "0100010000", ba.to_s
   end
 
   def test_total_set
-    bf = BitArray.new(10)
-    bf[1] = 1
-    bf[5] = 1
-    assert_equal 2, bf.total_set
+    ba = BitArray.new(10)
+    ba[1] = 1
+    ba[5] = 1
+    assert_equal 2, ba.total_set
   end
 end

@@ -1,21 +1,5 @@
-begin
-  require 'bundler/setup'
-rescue LoadError
-  puts 'You must `gem install bundler` and `bundle install` to run rake tasks'
-end
+require "bundler/gem_tasks"
+require "rake/testtask"
 
-Bundler::GemHelper.install_tasks
-
-require 'yard'
-YARD::Rake::YardocTask.new do |t|
-  t.files = ['lib/**/*.rb', 'README.md']
-end
-
-require 'rake/testtask'
-
-Rake::TestTask.new do |t|
-  t.libs << 'test'
-end
-
-desc "Run tests"
+Rake::TestTask.new      # defaults are fine for now
 task :default => :test
