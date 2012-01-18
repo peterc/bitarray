@@ -30,15 +30,17 @@ class TestBitArray < Test::Unit::TestCase
   end
 
   def test_random_side_effects
-    ba2 = BitArray.new(1000, 1)
+    ba2 = BitArray.new(@public_ba.size, 1)
 
-    on = 300.times.collect do
-      index = rand(1000)
+    on = (@public_ba.size / 2).times.collect do
+      index = rand(@public_ba.size)
       @public_ba[index] = 1
       ba2[index] = 0
       index
     end
-    1000.times do |i|
+    assert_equal(@public_ba.to_s, @public_ba.to_s_fast)
+
+    @public_ba.size.times do |i|
       assert_equal(@public_ba[i], on.include?(i) ? 1 : 0)
       assert_equal(ba2[i], on.include?(i) ? 0 : 1)
     end
@@ -63,10 +65,9 @@ class TestBitArray < Test::Unit::TestCase
   end
 
   def test_to_s
-    ba = BitArray.new(10)
-    ba[1] = 1
-    ba[5] = 1
-    assert_equal "0100010000", ba.to_s
+    ba = BitArray.new(35)
+    [1, 5, 6, 7, 10, 16, 33].each{|i|ba[i] = 1}
+    assert_equal "01000111001000001000000000000000010", ba.to_s
   end
 
   def test_total_set

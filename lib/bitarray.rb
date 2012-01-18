@@ -31,7 +31,7 @@ class BitArray
 
   # Returns the field as a string like "0101010100111100," etc.
   def to_s
-    inject("") { |a, b| a + b.to_s }
+    @field.collect{|ea| ("%032b" % ea).reverse}.join[0..@size-1]
   end
 
   # Returns the total number of bits that are set
