@@ -16,24 +16,24 @@ Works well for Bloom filters (the reason I wrote it).
 Create a bit array 1000 bits wide:
 
 ```ruby
- ba = BitArray.new(1000)
+ba = BitArray.new(1000)
 ```
 
 Setting and reading bits:
 
 ```ruby
-  ba[100] = 1
-  ba[100]    .. => 1
-  ba[100] = 0
+ba[100] = 1
+ba[100]    .. => 1
+ba[100] = 0
 ```
 
 More:
 
 ```ruby
-  ba = BitArray.new(20)
-  [1,3,5,9,11,13,15].each { |i| ba[i] = 1 }
-  ba.to_s
-  #=> "01010100010101010000"
-  ba.total_set
-  #=> 7
+ba = BitArray.new(20)
+[1,3,5,9,11,13,15].each { |i| ba[i] = 1 }
+ba.to_s
+#=> "01010100010101010000"
+ba.total_set
+#=> 7
 ```
