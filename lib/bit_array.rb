@@ -2,37 +2,39 @@
 #      AUTHOR: Peter Cooper
 #     LICENSE: MIT ( http://www.opensource.org/licenses/mit-license.php )
 #   COPYRIGHT: (c) 2007 Peter Cooper (http://www.petercooper.co.uk/)
-#     VERSION: v4
-#     HISTORY: v4 (fixed bug where setting 0 bits to 0 caused a set to 1)
+#     VERSION: v5
+#     HISTORY: v5 (added support for flags being on by default, instead of off)
+#              v4 (fixed bug where setting 0 bits to 0 caused a set to 1)
 #              v3 (supports dynamic bitwidths for array elements.. now doing 32 bit widths default)
 #              v2 (now uses 1 << y, rather than 2 ** y .. it's 21.8 times faster!)
 #              v1 (first release)
 #
-# DESCRIPTION: Basic, pure Ruby bit field. Pretty fast (for what it is) and memory efficient.
+# DESCRIPTION: Basic, pure Ruby bit array. Pretty fast (for what it is) and memory efficient.
 #              I've written a pretty intensive test suite for it and it passes great.
 #              Works well for Bloom filters (the reason I wrote it).
 #
-#              Create a bit field 1000 bits wide
-#                bf = BitField.new(1000)
+#              Create a bit array 1000 bits wide
+#                ba = BitArray.new(1000)
 #
 #              Setting and reading bits
-#                bf[100] = 1
-#                bf[100]    .. => 1
-#                bf[100] = 0
+#                ba[100] = 1
+#                ba[100]    .. => 1
+#                ba[100] = 0
 #
 #              More
-#                bf.to_s = "10101000101010101"  (example)
-#                bf.total_set         .. => 10  (example - 10 bits are set to "1")
+#                ba.to_s = "10101000101010101"  (example)
+#                ba.total_set         .. => 10  (example - 10 bits are set to "1")
 
 class BitArray
   attr_reader :size
   include Enumerable
-  VERSION = "0.0.4"
+  VERSION = "0.0.5"
   ELEMENT_WIDTH = 32
 
-  def initialize(size)
+  def initialize(size, default_value = 0)
     @size = size
     @field = Array.new(((size - 1) / ELEMENT_WIDTH) + 1, 0)
+    @field.map!{|i| ~i} if (default_value == 1)
   end
 
   # Set a bit (1/0)
