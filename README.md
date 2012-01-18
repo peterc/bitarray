@@ -23,8 +23,12 @@ Setting and reading bits:
 
 ```ruby
 ba[100] = 1
-ba[100]    .. => 1
+ba[100]
+#=> 1
+
 ba[100] = 0
+ba[100]
+#=> 0
 ```
 
 More:
