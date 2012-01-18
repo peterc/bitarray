@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bit-array (0.0.4)
+    bitarray (0.0.4)
 
 GEM
   remote: http://rubygems.org/
@@ -14,7 +14,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bit-array!
+  bitarray!
   rake
   test-unit
   yard

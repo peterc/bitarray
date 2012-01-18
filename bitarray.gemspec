@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "bit_array"
 
 Gem::Specification.new do |s|
-  s.name = "bit-array"
+  s.name = "bitarray"
   s.version = BitArray::VERSION
   s.authors = ["Peter Cooper"]
   s.email = ["git@peterc.org"]
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary = %q{A fast(ish), pure Ruby bit field "type"}
   s.description = %q{Rubygem packaging of Peter Cooper's BitArray class'}
 
-  s.rubyforge_project = "bit-array"
+  s.rubyforge_project = "bitarray"
 
   s.files = `git ls-files`.split("\n")
   s.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
