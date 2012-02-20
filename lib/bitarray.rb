@@ -6,8 +6,12 @@ class BitArray
 
   def initialize(size, default_value = 0)
     @size = size
-    @field = Array.new(((size - 1) / ELEMENT_WIDTH) + 1, 0)
-    @field.map!{|i| ~i} if (default_value == 1)
+    default = default_value == 0 ? 0 : (1<<ELEMENT_WIDTH)-1
+    max_field_index,last_bit_index = (size-1).divmod(ELEMENT_WIDTH)
+    @field = Array.new(max_field_index + 1, default)
+    if default_value != 0
+      @field[max_field_index] = (1<<last_bit_index+1)-1
+    end
   end
 
   # Set a bit (1/0)
