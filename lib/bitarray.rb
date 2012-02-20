@@ -1,44 +1,40 @@
+require 'bitarray/numeric'
+
 class BitArray
-  attr_reader :size
-  include Enumerable
+  attr_reader :ba
+  @@implementation_class = BitArray::Numeric
   VERSION = "0.0.5"
 
   def initialize(size, default_value = 0)
-    @size = size
-    @field = default_value == 0 ? 0 : (1<<size)-1
+    @ba = @@implementation_class.new(size, default_value)
+  end
+
+  def size
+    @ba.size
   end
 
   # Set a bit (1/0)
   def []=(position, value)
-    case value
-    when 0
-      @field ^= 1<<position if @field[position]==1
-    when 1
-      @field |= 1<<position
-    else
-      # Undefined, do nothing?
-    end
+    @ba[position]=value
   end
 
   # Read a bit (1/0)
   def [](position)
-    @field[position]
+    @ba[position]
   end
 
   # Iterate over each bit
   def each(&block)
-    @size.times { |position| yield self[position] }
+    @ba.each(block)
   end
 
   # Returns the field as a string like "0101010100111100," etc.
   def to_s
-    s = ''
-    @size.times { |i| s<<@field[i]+48 }
-    s
+    @ba.to_s
   end
 
   # Returns the total number of bits that are set
   def total_set
-    (0...@size).inject(0) { |a,i| a + @field[i] }
+    @ba.total_set
   end
 end
