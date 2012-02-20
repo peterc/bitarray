@@ -49,14 +49,15 @@ class TestBitArray < Test::Unit::TestCase
   def test_multiple_setting
     1.upto(999) do |pos|
       2.times { @public_ba[pos] = 1 }
-      assert_equal 1, @public_ba[pos]
+      assert_equal 1, @public_ba[pos], "#{pos} failure"
     end
   end
 
   def test_multiple_unsetting
+    @public_ba = BitArray.new(1000,1)
     1.upto(999) do |pos|
       2.times { @public_ba[pos] = 0 }
-      assert_equal 0, @public_ba[pos]
+      assert_equal 0, @public_ba[pos], "#{pos} failure"
     end
   end
 
@@ -76,4 +77,12 @@ class TestBitArray < Test::Unit::TestCase
     ba[5] = 1
     assert_equal 2, ba.total_set
   end
+
+  def test_total_set_default_1
+    ba = BitArray.new(10,1)
+    ba[1] = 0
+    ba[5] = 0
+    assert_equal 8, ba.total_set
+  end
+
 end
