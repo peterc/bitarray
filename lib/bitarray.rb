@@ -1,4 +1,5 @@
 require 'bitarray/numeric'
+require 'bitarray/string'
 
 class BitArray
   attr_reader :ba
