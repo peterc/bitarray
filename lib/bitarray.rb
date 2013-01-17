@@ -1,13 +1,14 @@
 class BitArray
   attr_reader :size
+  attr_reader :field
   include Enumerable
+
   VERSION = "0.0.5"
   ELEMENT_WIDTH = 32
 
-  def initialize(size, default_value = 0)
+  def initialize(size, field = nil)
     @size = size
-    @field = Array.new(((size - 1) / ELEMENT_WIDTH) + 1, 0)
-    @field.map!{|i| ~i} if (default_value == 1)
+    @field = field || Array.new(((size - 1) / ELEMENT_WIDTH) + 1, 0)
   end
 
   # Set a bit (1/0)

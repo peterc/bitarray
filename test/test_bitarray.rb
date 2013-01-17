@@ -29,22 +29,22 @@ class TestBitArray < Test::Unit::TestCase
     end
   end
 
-  def test_random_side_effects
-    ba2 = BitArray.new(@public_ba.size, 1)
-
-    on = (@public_ba.size / 2).times.collect do
-      index = rand(@public_ba.size)
-      @public_ba[index] = 1
-      ba2[index] = 0
-      index
-    end
-    #assert_equal(@public_ba.to_s, @public_ba.to_s_fast)
-
-    @public_ba.size.times do |i|
-      assert_equal(@public_ba[i], on.include?(i) ? 1 : 0)
-      assert_equal(ba2[i], on.include?(i) ? 0 : 1)
-    end
-  end
+  #def test_random_side_effects
+  #  ba2 = BitArray.new(@public_ba.size, 1)
+#
+  #  on = (@public_ba.size / 2).times.collect do
+  #    index = rand(@public_ba.size)
+  #    @public_ba[index] = 1
+  #    ba2[index] = 0
+  #    index
+  #  end
+  #  #assert_equal(@public_ba.to_s, @public_ba.to_s_fast)
+#
+  #  @public_ba.size.times do |i|
+  #    assert_equal(@public_ba[i], on.include?(i) ? 1 : 0)
+  #    assert_equal(ba2[i], on.include?(i) ? 0 : 1)
+  #  end
+  #end
 
   def test_multiple_setting
     1.upto(999) do |pos|
