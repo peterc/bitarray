@@ -56,4 +56,4 @@ ba.total_set
 
 ## License
 
-MIT licensed. Copyright 2007-2012 Peter Cooper, yada yada.
+MIT licensed. Copyright 2007-2013 Peter Cooper, yada yada.
