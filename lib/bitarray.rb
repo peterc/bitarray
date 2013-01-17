@@ -5,9 +5,9 @@ class BitArray
 
   ELEMENT_WIDTH = 32
 
-  def initialize(size)
+  def initialize(size, field = nil)
     @size = size
-    @field = Array.new(((size - 1) / ELEMENT_WIDTH) + 1, 0)
+    @field = field || Array.new(((size - 1) / ELEMENT_WIDTH) + 1, 0)
   end
 
   # Set a bit (1/0)
