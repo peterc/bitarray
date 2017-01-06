@@ -1,5 +1,5 @@
 require "bundler/gem_tasks"
 require "rake/testtask"
 
-Rake::TestTask.new      # defaults are fine for now
+Rake::TestTask.new
 task :default => :test
