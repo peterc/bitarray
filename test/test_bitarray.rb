@@ -2,14 +2,13 @@ require "minitest/autorun"
 require "bitarray"
 
 class TestBitArray < Minitest::Test
-
   def setup
     @public_ba = BitArray.new(1000)
   end
 
   def test_basic
     assert_equal 0, BitArray.new(100)[0]
-    assert_equal 0, BitArray.new(100)[1]
+    assert_equal 0, BitArray.new(100)[99]
   end
 
   def test_setting_and_unsetting
@@ -57,6 +56,7 @@ class TestBitArray < Minitest::Test
     ba = BitArray.new(10)
     ba[1] = 1
     ba[5] = 1
-    assert_equal 2, ba.total_set
+    ba[9] = 1
+    assert_equal 3, ba.total_set
   end
 end
