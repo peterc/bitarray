@@ -62,4 +62,4 @@ Thanks to Michael Slade for encouraging me to update this library on its 10th bi
 
 ## License
 
-MIT licensed. Copyright 2007-2013 Peter Cooper, yada yada.
+MIT licensed. Copyright 2007-2017 Peter Cooper.
