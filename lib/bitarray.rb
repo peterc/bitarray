@@ -7,7 +7,7 @@ class BitArray
 
   def initialize(size, field = nil)
     @size = size
-    @field = "\0" * (size / 8 + 1)
+    @field = field || "\0" * (size / 8 + 1)
   end
 
   # Set a bit (1/0)
