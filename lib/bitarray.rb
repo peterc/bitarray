@@ -13,15 +13,15 @@ class BitArray
   # Set a bit (1/0)
   def []=(position, value)
     if value == 1
-      @field.setbyte(position >> 3, @field.getbyte(position >> 3) | (1 << (position % 8)))
+      @field.setbyte(position >> 3, @field.getbyte(position >> 3) | (1 << (7 - position % 8)))
     else
-      @field.setbyte(position >> 3, @field.getbyte(position >> 3) ^ (1 << (position % 8)))
+      @field.setbyte(position >> 3, @field.getbyte(position >> 3) ^ (1 << (7 - position % 8)))
     end
   end
 
   # Read a bit (1/0)
   def [](position)
-    (@field.getbyte(position >> 3) & (1 << (position % 8))) > 0 ? 1 : 0
+    (@field.getbyte(position >> 3) & (1 << (7 - position % 8))) > 0 ? 1 : 0
   end
 
   # Iterate over each bit
@@ -31,7 +31,7 @@ class BitArray
 
   # Returns the field as a string like "0101010100111100," etc.
   def to_s
-    @field.bytes.collect{|ea| ("%08b" % ea).reverse}.join[0, @size]
+    @field.bytes.collect { |ea| ("%08b" % ea) }.join[0, @size]
   end
 
   # Returns the total number of bits that are set

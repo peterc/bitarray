@@ -52,6 +52,12 @@ class TestBitArray < Minitest::Test
     assert_equal "01000111001000001000000000000000010", ba.to_s
   end
 
+  def test_field
+    ba = BitArray.new(35)
+    [1, 5, 6, 7, 10, 16, 33].each{|i|ba[i] = 1}
+    assert_equal "0100011100100000100000000000000001000000", ba.field.unpack('B*')[0]
+  end
+
   def test_total_set
     ba = BitArray.new(10)
     ba[1] = 1
