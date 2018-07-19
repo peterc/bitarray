@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bitarray (1.0.0)
+    bitarray (2.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -18,4 +18,4 @@ DEPENDENCIES
   rake
 
 BUNDLED WITH
-   1.13.7
+   1.16.3

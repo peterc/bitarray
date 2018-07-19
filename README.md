@@ -48,7 +48,7 @@ ba.total_set
 ```
 
 ## History
-- 1.0.1 in 2018 (Changed bits order to be compliant with Redis' setbit/getbit and fixed initialize with custom field)
+- 2.0.0 in 2018 (Changed bits order to be compliant with Redis' setbit/getbit and fixed initialize with custom field)
 - 1.0.0 in 2017 (updated for modern Ruby, more efficient storage, and 10th birthday)
 - 0.0.1 in 2012 (original v5 released on GitHub)
 - v5 (added support for flags being on by default, instead of off)
