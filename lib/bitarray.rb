@@ -14,7 +14,7 @@ class BitArray
   def []=(position, value)
     if value == 1
       @field.setbyte(position >> 3, @field.getbyte(position >> 3) | (1 << (position % 8)))
-    else
+    elsif @field.getbyte(position >> 3) & (1 << (position % 8)) > 0
       @field.setbyte(position >> 3, @field.getbyte(position >> 3) ^ (1 << (position % 8)))
     end
   end

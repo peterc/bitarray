@@ -42,6 +42,11 @@ class TestBitArray < Minitest::Test
     end
   end
 
+  def test_setting_zero_bit_to_zero
+    @public_ba[50] = 0
+    assert_equal 0, @public_ba[50]
+  end
+
   def test_size
     assert_equal 1000, @public_ba.size
   end
