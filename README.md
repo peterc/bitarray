@@ -48,6 +48,7 @@ ba.total_set
 ```
 
 ## History
+- 1.1 in 2018 (fixed a significant bug)
 - 1.0 in 2017 (updated for modern Ruby, more efficient storage, and 10th birthday)
 - 0.0.1 in 2012 (original v5 released on GitHub)
 - v5 (added support for flags being on by default, instead of off)
@@ -60,6 +61,8 @@ ba.total_set
 
 Thanks to Michael Slade for encouraging me to update this library on its 10th birthday and for suggesting finally using String's getbyte and setbyte methods now that we're all on 1.9+ compatible implementations.
 
+Further thanks to @tdeo, @JoshuaSP, and @m1lt0n for pull requests.
+
 ## License
 
-MIT licensed. Copyright 2007-2017 Peter Cooper.
+MIT licensed. Copyright 2007-2018 Peter Cooper.
