@@ -15,7 +15,7 @@ class BitArray
     if value == 1
       @field.setbyte(position >> 3, @field.getbyte(position >> 3) | (1 << (position % 8)))
     else
-      @field.setbyte(position >> 3, @field.getbyte(position >> 3) ^ (1 << (position % 8)))
+      @field.setbyte(position >> 3, @field.getbyte(position >> 3) & ~(1 << (position % 8)))
     end
   end
 
