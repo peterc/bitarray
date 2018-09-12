@@ -47,8 +47,23 @@ ba.total_set
 #=> 7
 ```
 
+Initializing `BitArray` with a custom field value:
+
+```ruby
+ba = BitArray.new(16, ["0000111111110000"].pack('B*'))
+ba.to_s # "1111000000001111"
+```
+
+`BitArray` by default stores the bits in reverse order for each byte. If for example, you are initializing `BitArray` with Redis raw value manipulated with `setbit` / `getbit` operations, you will need to tell `BitArray` to not reverse the bits in each byte using the `reverse_byte: false` option:
+
+```ruby
+ba = BitArray.new(16, ["0000111111110000"].pack('B*'), reverse_byte: false)
+ba.to_s # "0000111111110000"
+```
+
+
 ## History
-- 2.0.0 in 2018 (Changed bits order to be compliant with Redis' setbit/getbit)
+- 1.2 in 2018 (Added option to skip reverse the bits for each byte)
 - 1.1 in 2018 (fixed a significant bug)
 - 1.0 in 2017 (updated for modern Ruby, more efficient storage, and 10th birthday)
 - 0.0.1 in 2012 (original v5 released on GitHub)
