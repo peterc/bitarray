@@ -52,8 +52,24 @@ class TestBitArray < Minitest::Test
 
   def test_to_s
     ba = BitArray.new(35)
-    [1, 5, 6, 7, 10, 16, 33].each{|i|ba[i] = 1}
+    [1, 5, 6, 7, 10, 16, 33].each { |i| ba[i] = 1}
     assert_equal "01000111001000001000000000000000010", ba.to_s
+  end
+
+  def test_field
+    ba = BitArray.new(35)
+    [1, 5, 6, 7, 10, 16, 33].each { |i| ba[i] = 1}
+    assert_equal "1110001000000100000000010000000000000010", ba.field.unpack('B*')[0]
+  end
+
+  def test_initialize_with_field
+    ba = BitArray.new(15, ["0100011100100001"].pack('B*'))
+
+    assert_equal [0, 1, 2, 6, 8, 13], 0.upto(15).select { |i| ba[i] == 1 }
+
+    ba[2] = 1
+    ba[12] = 1
+    assert_equal [0, 1, 2, 6, 8, 12, 13], 0.upto(15).select { |i| ba[i] == 1 }
   end
 
   def test_total_set
@@ -62,5 +78,29 @@ class TestBitArray < Minitest::Test
     ba[5] = 1
     ba[9] = 1
     assert_equal 3, ba.total_set
+  end
+end
+
+class TestBitArrayWhenNonReversedByte < Minitest::Test
+  def test_to_s
+    ba = BitArray.new(35, nil, reverse_byte: true)
+    [1, 5, 6, 7, 10, 16, 33].each { |i| ba[i] = 1}
+    assert_equal "01000111001000001000000000000000010", ba.to_s
+  end
+
+  def test_field
+    ba = BitArray.new(35, nil, reverse_byte: false)
+    [1, 5, 6, 7, 10, 16, 33].each { |i| ba[i] = 1}
+    assert_equal "0100011100100000100000000000000001000000", ba.field.unpack('B*')[0]
+  end
+
+  def test_initialize_with_field
+    ba = BitArray.new(15, ["0100011100100001"].pack('B*'), reverse_byte: false)
+
+    assert_equal [1, 5, 6, 7, 10, 15], 0.upto(15).select { |i| ba[i] == 1 }
+
+    ba[2] = 1
+    ba[12] = 1
+    assert_equal [1, 2, 5, 6, 7, 10, 12, 15], 0.upto(15).select { |i| ba[i] == 1 }
   end
 end
