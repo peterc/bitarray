@@ -26,13 +26,20 @@ class BitArray
   end
 
   # Iterate over each bit
-  def each(&block)
+  def each
+    return to_enum(:each) unless block_given?
     @size.times { |position| yield self[position] }
   end
 
   # Returns the field as a string like "0101010100111100," etc.
   def to_s
     @field.collect{|ea| ("%0#{ELEMENT_WIDTH}b" % ea).reverse}.join[0..@size-1]
+  end
+  
+  # Iterate over each byte
+  def each_byte
+    return to_enum(:each_byte) unless block_given?
+    @field.each { |byte| yield byte }
   end
 
   # Returns the total number of bits that are set

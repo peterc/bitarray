@@ -26,7 +26,8 @@ class BitArray
   end
 
   # Iterate over each bit
-  def each(&block)
+  def each
+    return to_enum(:each) unless block_given?
     @size.times { |position| yield self[position] }
   end
 
@@ -38,11 +39,17 @@ class BitArray
       @field.bytes.collect { |ea| ("%08b" % ea) }.join[0, @size]
     end
   end
+  
+  # Iterates over each byte
+  def each_byte
+    return to_enum(:each_byte) unless block_given?
+    @field.bytes.each{ |byte| yield byte }
+  end
 
   # Returns the total number of bits that are set
   # (The technique used here is about 6 times faster than using each or inject direct on the bitfield)
   def total_set
-    @field.bytes.inject(0) { |a, byte| a += byte & 1 and byte >>= 1 until byte == 0; a }
+    each_byte.inject(0) { |a, byte| a += byte & 1 and byte >>= 1 until byte == 0; a }
   end
 
   def byte_position(position)
