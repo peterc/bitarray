@@ -27,7 +27,7 @@ class BitArray
 
   # Iterate over each bit
   def each
-    return to_enum(:each) unless block_given?
+    return to_enum unless block_given?
     @size.times { |position| yield self[position] }
   end
 
