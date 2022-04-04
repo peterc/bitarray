@@ -1,13 +1,13 @@
-# BitArray: A simple bit-array/bitfield library in pure Ruby
+# BitArray: Pure Ruby bit-array/bitfield library
 
-A simple, pure-Ruby 'bit field' object. Works well for Bloom filters (the use case for which I originally wrote it).
+A simple, pure-Ruby 'bit field' object. Works well for Bloom filters (the use case for which I originally wrote it, although there are numerous good libraries for that task now).
 
-Originally written in 2007 and left without significant update until 2017, it has now been updated to work within a typical, modern Ruby environment while maintaining the same API.
+Despite its age, BitArray has been updated to work within a typical, modern Ruby environment, but is only 'mildly' maintained.
 
 ## Installation
 
 ```ruby
-gem install bitarray
+bundle add bitarray
 ```
 
 ## Examples
@@ -63,6 +63,7 @@ ba.to_s # "0000111111110000"
 
 
 ## History
+- 1.3 in 2022 (cleanups and a minor perf tweak)
 - 1.2 in 2018 (Added option to skip reverse the bits for each byte by @dalibor)
 - 1.1 in 2018 (fixed a significant bug)
 - 1.0 in 2017 (updated for modern Ruby, more efficient storage, and 10th birthday)
@@ -77,8 +78,8 @@ ba.to_s # "0000111111110000"
 
 Thanks to Michael Slade for encouraging me to update this library on its 10th birthday and for suggesting finally using String's getbyte and setbyte methods now that we're all on 1.9+ compatible implementations.
 
-Further thanks to @tdeo, @JoshuaSP, @dalibor and @m1lt0n for pull requests.
+Further thanks to @tdeo, @JoshuaSP, @dalibor, @yegct and @m1lt0n for pull requests.
 
 ## License
 
-MIT licensed. Copyright 2007-2018 Peter Cooper.
+MIT licensed. Copyright 2007-2022 Peter Cooper.
