@@ -1,5 +1,5 @@
 require "minitest/autorun"
-require "bitarray"
+require_relative "../lib/bitarray"
 
 class TestBitArray < Minitest::Test
   def setup
