@@ -49,7 +49,7 @@ class BitArray
   # Returns the total number of bits that are set
   # (The technique used here is about 6 times faster than using each or inject direct on the bitfield)
   def total_set
-    @field.bytes.inject(0) { |a, byte| a += byte & 1 and byte >>= 1 until byte == 0; a }
+    @field.each_byte.inject(0) { |a, byte| a += byte & 1 and byte >>= 1 until byte == 0; a }
   end
 
   def byte_position(position)
