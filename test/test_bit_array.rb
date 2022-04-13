@@ -1,4 +1,5 @@
 require "minitest/autorun"
+require "tempfile"
 require_relative "../lib/bitarray"
 
 class TestBitArray < Minitest::Test
@@ -78,6 +79,50 @@ class TestBitArray < Minitest::Test
     ba[5] = 1
     ba[9] = 1
     assert_equal 3, ba.total_set
+  end
+
+  def test_dump_load
+    ba_dump = BitArray.new(35)
+    [1, 5, 6, 7, 10, 16, 33].each { |i| ba_dump[i] = 1}
+    Tempfile.create("bit_array.dat") do |io|
+      ba_dump.dump(io)
+      io.rewind
+      ba_load = BitArray.load(io)
+
+      assert_equal ba_dump, ba_load
+    end
+  end
+
+  def test_union
+    set_bits = [1, 5, 6, 7, 10, 16, 33].shuffle
+
+    ba_lhs = BitArray.new(35)
+    set_bits[0..3].each { |i| ba_lhs[i] = 1}
+    ba_rhs = BitArray.new(35)
+    # Deliberately overlap a little
+    set_bits[3..-1].each { |i| ba_rhs[i] = 1}
+    ba_expected = BitArray.new(35)
+    set_bits.each { |i| ba_expected[i] = 1}
+
+    assert_equal ba_lhs | ba_rhs, ba_expected
+  end
+
+  def test_union_unequal_sizes
+    ba_lhs = BitArray.new(4)
+    ba_rhs = BitArray.new(5)
+
+    assert_raises ArgumentError do
+      ba_lhs | ba_rhs
+    end
+  end
+
+  def test_union_unequal_reverse_bytes
+    ba_lhs = BitArray.new(4, reverse_byte: true)
+    ba_rhs = BitArray.new(4, reverse_byte: false)
+
+    assert_raises ArgumentError do
+      ba_lhs | ba_rhs
+    end
   end
 end
 

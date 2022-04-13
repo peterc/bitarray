@@ -61,8 +61,28 @@ ba = BitArray.new(16, ["0000111111110000"].pack('B*'), reverse_byte: false)
 ba.to_s # "0000111111110000"
 ```
 
+Saving and loading `BitArray`:
+
+```ruby
+ba = BitArray.new(16, ["0000111111110000"].pack('B*'))
+ba.dump(File.new("bitarray.dat", "w"))
+#=> #<File:bitarray.dat>
+ba = BitArray.load(File.open("bitarray.dat"))
+ba.to_s # "1111000000001111"
+```
+
+Read-only access without loading it into memory:
+
+```ruby
+ba = BitArray.new(16, ["0000111111110000"].pack('B*'))
+ba.dump(File.new("bitarray.dat", "w"))
+ba_ro = BitArrayFile.new(filename: "bitarray.dat")
+ba_ro[0] # 1
+ba_ro[4] # 0
+```
 
 ## History
+- 1.4 in 2022 (cleanups, add unions, dump/load, and BitArrayFile)
 - 1.3 in 2022 (cleanups and a minor perf tweak)
 - 1.2 in 2018 (Added option to skip reverse the bits for each byte by @dalibor)
 - 1.1 in 2018 (fixed a significant bug)

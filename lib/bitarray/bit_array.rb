@@ -2,7 +2,8 @@ class BitArray
   attr_reader :field, :reverse_byte, :size
   include Enumerable
 
-  VERSION = "1.3.0"
+  VERSION = "1.4.0"
+  HEADER_LENGTH = 8 + 1 # QC (@size, @reverse_byte)
 
   def initialize(size, field = nil, reverse_byte: true)
     @size = size
@@ -22,6 +23,26 @@ class BitArray
   # Read a bit (1/0)
   def [](position)
     (@field.getbyte(position >> 3) & (1 << (byte_position(position) % 8))) > 0 ? 1 : 0
+  end
+
+  def ==(rhs)
+    @size == rhs.size && @reverse_byte == rhs.reverse_byte && @field == rhs.field
+  end
+
+  # Allows joining (union) two bitarrays of identical size.
+  # The resulting bitarray will contain any bit set in either constituent arrays.
+  # |= is implicitly defined, so you can do source_ba |= other_ba
+  def |(rhs)
+    raise ArgumentError.new("Bitarray sizes must be identical") if @size != rhs.size
+    raise ArgumentError.new("Reverse byte settings must be identical") if @reverse_byte != rhs.reverse_byte
+
+    combined = BitArray.new(@size, @field, reverse_byte: @reverse_byte)
+    rhs.field.each_byte.inject(0) do |byte_pos, byte|
+      combined.field.setbyte(byte_pos, combined.field.getbyte(byte_pos) | byte)
+      byte_pos + 1
+    end
+
+    combined
   end
 
   # Iterate over each bit
@@ -54,5 +75,19 @@ class BitArray
 
   private def byte_position(position)
     @reverse_byte ? position : 7 - position
+  end
+
+  # Save contents to an io device such as a file
+  def dump(io)
+    io.write([@size, @reverse_byte ? 1 : 0].pack("QC"))
+    io.write(@field.b)
+    io
+  end
+
+  # Load bitarray from an io device such as a file
+  def self.load(io)
+    size, reverse_byte = io.read(9).unpack("QC")
+    field = io.read
+    new(size, field, reverse_byte: reverse_byte == 1)
   end
 end
