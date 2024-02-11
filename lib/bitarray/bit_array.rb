@@ -2,7 +2,7 @@ class BitArray
   attr_reader :field, :reverse_byte, :size
   include Enumerable
 
-  VERSION = "1.3.0"
+  VERSION = "1.3.1"
 
   def initialize(size, field = nil, reverse_byte: true)
     @size = size
