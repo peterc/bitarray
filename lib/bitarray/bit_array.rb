@@ -2,7 +2,7 @@ class BitArray
   attr_reader :field, :reverse_byte, :size
   include Enumerable
 
-  VERSION = "1.3.1"
+  VERSION = "1.3.2"
 
   def initialize(size, field = nil, reverse_byte: true)
     @size = size
@@ -46,10 +46,8 @@ class BitArray
   end
 
   # Returns the total number of bits that are set
-  # Use Brian Kernighan's way, see
-  # https://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetKernighan
   def total_set
-    @field.each_byte.inject(0) { |a, byte| (a += 1; byte &= byte - 1) while byte > 0 ; a }
+    @field.unpack1('B*').count('1')
   end
 
   private def byte_position(position)

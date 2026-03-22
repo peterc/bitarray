@@ -4,7 +4,7 @@ A simple, pure-Ruby 'bit field' object.
 
 Originally built to help power a bloom filter, although there are other higher level libraries for that task now (https://github.com/igrigorik/bloomfilter-rb is a popular one.)
 
-BitArray has changed little over the years, but has been maintained to work within a typical, modern Ruby environment and, as of February 2024, is confirmed to work with both Ruby 3.0.1 and Ruby 3.3.0.
+BitArray has changed little over the years, but has been maintained to work within a typical, modern Ruby environment and works with Ruby 2.1+ through Ruby 3.x.
 
 ## Installation
 
@@ -64,6 +64,7 @@ ba.to_s # "0000111111110000"
 ```
 
 ## History
+- 1.3.2 in 2026 (minor cleanup, faster total_set)
 - 1.3.1 in 2024 (no changes other than adding license to gemspec)
 - 1.3 in 2022 (cleanups and a minor perf tweak)
 - 1.2 in 2018 (Added option to skip reverse the bits for each byte by @dalibor)
@@ -84,4 +85,4 @@ Further thanks to @tdeo, @JoshuaSP, @dalibor, @yegct and @m1lt0n for pull reques
 
 ## License
 
-MIT licensed. Copyright 2007-2024 Peter Cooper.
+MIT licensed. Copyright 2007-2026 Peter Cooper.
